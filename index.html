@@ -1,0 +1,1484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Welcome to Nexus</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  :root {
+    --primary: #ffffff;
+    --secondary: #e7f0ff;
+    --accent: #2563eb; /* blue */
+    --accent-light: #60a5fa;
+    --text: #1e293b; /* dark blue */
+    --text-muted: #475569;
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(96, 165, 250, 0.3);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+    color: var(--text);
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  /* ===== HERO SECTION ===== */
+  .hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    background: url("office-bg.png") no-repeat center center/cover;
+  }
+  .hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+ /* background: rgba(0, 0, 0, 0.15);*/
+  z-index: 1;
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+.hero-content {
+  background: rgba(255,255,255,0.35);
+  padding: 30px 40px;
+  border-radius: 20px;
+  backdrop-filter: blur(15px);
+  display: inline-block;
+}
+
+
+  .particles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+  .particle {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    opacity: 0.25;
+  }
+  .hero-content {
+    text-align: center;
+    z-index: 10;
+    position: relative;
+  }
+  .hero-content h1 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+  .hero-content p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    max-width: 620px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .scroll-indicator {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: bounce 2s infinite;
+    color: var(--accent);
+    font-size: 1.75rem;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(12px); }
+  }
+
+  /* ===== IDENTITY CARD ===== */
+  .section {
+    padding: 120px 20px;
+  }
+  .section-title {
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 80px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .identity-card-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  perspective: 1000px;
+
+  /* Layered background: gradients on top of image */
+  background: 
+    /* Multiple radial gradient overlays */
+    radial-gradient(circle at 20% 80%, rgba(59,130,246,0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(96,165,250,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(30,64,175,0.08) 0%, transparent 50%),
+    
+    /* Background image below the gradients */
+    url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+
+  padding: 4rem 2rem;
+  border-radius: 40px;
+  margin: 2rem 0;
+  backdrop-filter: blur(20px); /* keeps glass effect */
+  box-shadow: 0 25px 60px rgba(37, 99, 235, 0.2);
+}
+
+  .identity-card {
+    width: 380px;
+    height: 520px;
+    background: var(--glass-bg);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 28px;
+    padding: 45px 35px;
+    backdrop-filter: blur(20px);
+    box-shadow:
+      0 25px 50px rgba(37, 99, 235, 0.15),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    
+
+  }
+  .identity-card:hover {
+    transform: rotateX(8deg) rotateY(12deg) scale(1.03);
+    box-shadow:
+      0 35px 70px rgba(37, 99, 235, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  }
+  .card-photo {
+    width: 140px;
+    height: 140px;
+    background: linear-gradient(135deg, #3b82f6, #60a5fa);
+    border-radius: 50%;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.5rem;
+    box-shadow: 0 0 50px rgba(37, 99, 235, 0.6);
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    color: white;
+  }
+  .card-info h3 {
+    font-size: 1.8rem;
+    margin-bottom: 0.8rem;
+    text-align: center;
+    color: var(--text);
+  }
+  .card-role {
+    color: var(--accent);
+    font-size: 1.1rem;
+    margin-bottom: 1.8rem;
+    font-weight: 600;
+  }
+  .card-detail {
+    text-align: center;
+    margin: 18px 0;
+    font-size: 1rem;
+    color: var(--text-muted);
+    width: 100%;
+  }
+  .card-detail strong {
+    color: var(--text);
+  }
+
+  /* ===== VIDEO SECTION ===== */
+  .video-section {
+  text-align: center;
+  position: relative;              /* ✅ ADD */
+  background: 
+    radial-gradient(circle at 25% 75%, rgba(59,130,246,0.12) 0%, transparent 50%),  /* ✅ ADD */
+    radial-gradient(circle at 75% 25%, rgba(96,165,250,0.1) 0%, transparent 50%),   /* ✅ ADD */
+    url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1400&q=85') center/cover no-repeat;  /* ✅ ADD */
+  padding: 5rem 2rem;              /* ✅ ADD */
+  border-radius: 40px;             /* ✅ ADD */
+  margin: 3rem 0;
+}
+
+  
+  .video-container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto 50px;
+    aspect-ratio: 16 / 9;
+  }
+  .video-frame {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.25), rgba(96, 165, 250, 0.15));
+    border: 2px solid var(--glass-border);
+    border-radius: 24px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+      0 25px 60px rgba(37, 99, 235, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  }
+  .video-frame::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at center, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+    animation: glow-pulse 4s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes glow-pulse {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+  }
+  .play-button {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90px; height: 90px;
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 0 70px rgba(37, 99, 235, 0.6);
+    animation: pulse-scale 2.5s ease-in-out infinite;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    color: white;
+  }
+  @keyframes pulse-scale {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) scale(1.12); }
+  }
+  .play-button i {
+    font-size: 2.2rem;
+  }
+  .video-caption {
+  margin-top: 40px;
+  font-size: 1.35rem;                    /* Slightly larger */
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;  /* ✅ MODERN FONT */
+  font-weight: 500;                      /* ✅ SEMI-BOLD */
+  line-height: 1.75;                     /* ✅ PERFECT SPACING */
+  color: #1e293b;                       
+  letter-spacing: -0.015em;              /* ✅ TIGHT TRACKING */
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2.5rem 2.5rem;                
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(25px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 
+    0 25px 50px rgba(37, 99, 235, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  position: relative;
+  z-index: 5;
+  text-align: center;
+}
+
+
+  
+
+  /* ===== TEAM & MANAGER ===== */
+  .team-section {
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); /* Soft Peach */
+  padding: 6rem 2rem;
+  border-radius: 40px;
+  margin: 3rem 0;
+}
+
+/* Keep your existing .team-card styles unchanged */
+
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  .team-card {
+    background: var(--glass-bg);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 40px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .team-card:hover {
+    transform: translateY(-12px) scale(1.03);
+    box-shadow: 0 30px 60px rgba(37, 99, 235, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  }
+  .team-card-icon {
+    width: 70px;
+    height: 70px;
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    box-shadow: 0 0 35px rgba(37, 99, 235, 0.5);
+    color: white;
+  }
+  .team-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    color: var(--text);
+  }
+  .team-card p {
+    color: var(--text-muted);
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .timeline-wrapper {
+  max-width: 1000px;
+  margin: 5rem auto 0;
+  padding: 4rem 3rem;
+  position: relative;
+  background: 
+    /* Subtle layered gradients */
+    radial-gradient(circle at 20% 20%, rgba(59,130,246,0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(96,165,250,0.1) 0%, transparent 50%),
+    rgba(255, 255, 255, 0.85);
+  border-radius: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(35px);
+  box-shadow: 
+    0 40px 100px rgba(37, 99, 235, 0.2),
+    0 20px 40px rgba(0, 0, 0, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.3);
+  text-align: center;
+  color: #1e293b;
+}
+
+/* Premium typography */
+.timeline-wrapper h3 {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+/* Main note text */
+.timeline-wrapper p {
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: -0.01em;
+  max-width: 800px;
+  margin: 0 auto;
+  color: #334155;
+}
+
+/* Shine accent line */
+.timeline-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.5), transparent);
+}
+
+/* Subtle hover lift */
+.timeline-wrapper:hover {
+  transform: translateY(-8px);
+  box-shadow: 
+    0 55px 120px rgba(37, 99, 235, 0.3),
+    0 25px 50px rgba(0, 0, 0, 0.08);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+  /* ===== GALLERY ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 100px auto 0;
+  }
+  .gallery-item {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    border-radius: 20px;
+    height: 280px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.25);
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .gallery-item::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.4s ease;
+    border-radius: 20px;
+  }
+  .gallery-item:hover::after {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .gallery-item:hover {
+    transform: scale(1.03) translateY(-8px);
+    box-shadow: 0 20px 60px rgba(37, 99, 235, 0.45);
+  }
+  .gallery-label {
+    position: absolute;
+    bottom: 25px;
+    left: 25px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    z-index: 10;
+    color: white;
+    opacity: 0;
+    transform: translateY(15px);
+    transition: all 0.4s ease;
+  }
+  .gallery-item:hover .gallery-label {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+
+  /* ===== CULTURE ===== */
+ .culture-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 2rem;
+  max-width: 1100px;
+  margin: 4rem auto;
+  padding: 0 2rem;
+}
+
+.culture-card {
+  position: relative;
+  padding: 3rem 2.5rem;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(30px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 28px;
+  box-shadow: 
+    0 25px 60px rgba(37, 99, 235, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+  overflow: hidden;
+}
+
+.culture-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, #3b82f6, #60a5fa);
+  border-radius: 2px 0 0 2px;
+}
+
+.culture-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 
+    0 40px 80px rgba(37, 99, 235, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
+  background: rgba(255, 255, 255, 0.45);
+}
+
+.culture-card h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.culture-card h3::before {
+  content: '→';
+  color: #3b82f6;
+  font-weight: 900;
+  font-size: 1.2rem;
+}
+
+.culture-card p {
+  color: #475569;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+  /* ===== LEADERSHIP TEAM ===== */
+  .leadership-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 45px;
+    max-width: 1200px;
+    margin: 100px auto 0;
+  }
+  .leader-card {
+    text-align: center;
+    perspective: 1000px;
+  }
+ .leader-avatar {
+  width: 90px;           /* ✅ SMALLER */
+  height: 90px;          /* ✅ SMALLER */
+  margin: 0 auto 1.2rem;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 15px 35px rgba(37, 99, 235, 0.2);
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.4s ease;
+}
+
+.leader-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;     /* ✅ PERFECT CROPPING */
+  object-position: center; /* ✅ FACE CENTERED */
+  display: block;
+}
+
+.leader-card:hover .leader-avatar {
+  transform: scale(1.08);
+  box-shadow: 0 25px 50px rgba(37, 99, 235, 0.35);
+}
+
+  
+  .leader-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .leader-role {
+    color: var(--accent);
+    font-size: 1rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  .leader-bio {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  .social-icons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+  }
+  .social-icons a {
+    width: 40px;
+    height: 40px;
+    background: rgba(37, 99, 235, 0.25);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent-light);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+  .social-icons a:hover {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.1);
+  }
+
+  /* ===== CHECKLIST ===== */
+  .checklist-container {
+    max-width: 800px;
+    margin: 100px auto 0;
+  }
+  .progress-bar {
+    width: 100%;
+    height: 8px;
+    background: rgba(37, 99, 235, 0.15);
+    border-radius: 12px;
+    margin-bottom: 50px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+    width: 0%;
+    transition: width 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+  }
+  .checklist-item {
+    background: var(--glass-bg);
+    border: 1.5px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 28px 35px;
+    margin-bottom: 22px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
+  }
+  .checklist-item:hover {
+    border-color: var(--accent);
+    box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
+    transform: translateX(12px);
+  }
+  .checklist-item.completed {
+    opacity: 0.7;
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.2), rgba(96, 165, 250, 0.15));
+  }
+  .checkbox {
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.4s ease;
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .checkbox i {
+  opacity: 0;      /* hide initially */
+  transition: 0.3s ease;
+}
+
+.checklist-item.completed .checkbox i {
+  opacity: 1;      /* show when completed */
+}
+
+  .checklist-item:hover .checkbox {
+    border-color: var(--accent-light);
+    background: rgba(37, 99, 235, 0.2);
+    transform: scale(1.1);
+  }
+  .checklist-item.completed .checkbox {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    border-color: #2563eb;
+  }
+  .checklist-item.completed .checkbox i {
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .checklist-text {
+    flex: 1;
+  }
+  .checklist-text h4 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+    color: var(--text);
+  }
+  .checklist-text p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+  }
+ 
+
+.checklist-items {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  transition: all 0.3s ease;
+}
+
+.checklist-item:hover {
+  background: rgba(255, 255, 255, 0.8);
+  transform: translateX(8px);
+}
+
+.toggle-checkbox {
+  display: none;
+}
+
+.checkbox {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #d1d5db;
+  border-radius: 6px;
+  margin-right: 16px;
+  margin-top: 2px;
+  flex-shrink: 0;
+  background: #ffffff;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+}
+
+.toggle-checkbox:checked + .checkbox {
+  background: #10b981;
+  border-color: #10b981;
+  transform: scale(1.05);
+}
+
+.toggle-checkbox:checked + .checkbox::after {
+  content: '✔';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.checklist-text h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1e293b;
+  font-size: 1.1rem;
+}
+
+.checklist-text p {
+  margin: 0;
+  color: #64748b;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  margin-bottom: 2.5rem;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  width: 0%;
+  border-radius: 4px;
+  transition: width 0.5s ease;
+}
+
+
+
+
+
+
+
+  /* ===== FINAL SECTION ===== */
+  .final-section {
+    text-align: center;
+    max-width: 720px;
+    margin: 120px auto 100px;
+    padding: 0 20px;
+  }
+  .final-section h2 {
+    font-size: 3rem;
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .final-section p {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    margin-bottom: 40px;
+    line-height: 1.8;
+  }
+  .signature {
+    font-family: 'Brush Script MT', cursive;
+    font-size: 2.2rem;
+    color: var(--accent);
+    margin: 30px 0 50px;
+    opacity: 0.95;
+  }
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    color: white;
+    padding: 18px 55px;
+    border-radius: 50px;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    box-shadow: 0 18px 45px rgba(37, 99, 235, 0.5);
+    backdrop-filter: blur(20px);
+  }
+  .cta-button:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 27px 70px rgba(37, 99, 235, 0.7);
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+  background: linear-gradient(180deg, #0f172a, #1e293b);
+  padding: 70px 0;
+  color: #e2e8f0;
+  margin-top: 70px;
+}
+
+.footer-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: auto;
+}
+
+/* Mission Line */
+.footer-mission {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  margin-bottom: 50px;
+  color: #f1f5f9;
+}
+
+/* Core Values */
+.footer-values h4 {
+  text-align: center;
+  margin-bottom: 15px;
+  color: #f8fafc;
+}
+
+.values-grid {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.values-grid span {
+  background: rgba(255, 255, 255, 0.07);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  color: #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* First Week Overview */
+.footer-week {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.footer-week h4 {
+  margin-bottom: 15px;
+  color: #f8fafc;
+}
+
+.footer-week ul {
+  list-style: none;
+  padding: 0;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #cbd5e1;
+}
+
+/* HR Contact */
+.footer-contact {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.footer-contact strong {
+  color: #38bdf8;
+  font-size: 1.05rem;
+}
+
+/* Leadership Quote */
+.footer-quote {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.footer-quote p {
+  font-size: 1.1rem;
+  font-style: italic;
+  color: #f1f5f9;
+  margin-bottom: 5px;
+}
+
+.footer-quote span {
+  font-size: 0.9rem;
+  color: #94a3b8;
+}
+
+/* Bottom Line */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 15px;
+  text-align: center;
+  font-size: 0.82rem;
+  color: #94a3b8;
+}
+
+  footer {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(37, 99, 235, 0.1));
+    border-top: 1.5px solid var(--glass-border);
+    padding: 50px 20px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .hero-content h1 { font-size: 3rem; }
+    .section-title { font-size: 2.2rem; }
+    .team-grid, .culture-grid, .leadership-grid, .gallery-grid { grid-template-columns: 1fr; }
+    .section { padding: 80px 20px; }
+  }
+</style>
+</head>
+<body>
+  <!-- ===== HERO SECTION ===== -->
+  <section class="hero" id="hero">
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+      <h1 id="welcomeText">Welcome to Nexus</h1>
+      <p id="heroSubtext">Your journey starts today. Let's build something extraordinary together.</p>
+    </div>
+    <div class="scroll-indicator">
+      <i class="fas fa-chevron-down"></i>
+    </div>
+  </section>
+
+  <!-- ===== IDENTITY CARD ===== -->
+  <section class="section">
+    <h2 class="section-title">Your Employee Profile</h2>
+    <div class="identity-card-container">
+      <div class="identity-card">
+        <div class="card-photo">👤</div>
+        <div class="card-info">
+          <h3 id="empName">Alex Johnson</h3>
+          <div class="card-role" id="empRole">Senior Product Designer</div>
+          <div class="card-detail"><strong>Department:</strong> <span id="empDept">Product</span></div>
+          <div class="card-detail"><strong>Joining Date:</strong> <span id="joinDate">Dec 1, 2025</span></div>
+          <div class="card-detail"><strong>Fun Fact:</strong> <span id="funFact">Coffee enthusiast 🎨</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== VIDEO SECTION ===== -->
+  <section class="section video-section">
+    <h2 class="section-title">A Special Welcome From Our Founder</h2>
+    <div class="video-container">
+      <div class="video-frame">
+        <div class="play-button" id="playBtn"><i class="fas fa-play"></i></div>
+      </div>
+    </div>
+    <p class="video-caption">Watch our founder share the vision and values that drive Nexus forward.</p>
+  </section>
+  
+
+  <!-- ===== TEAM & MANAGER ===== -->
+  <section class="section">
+    <h2 class="section-title">Your Nexus Team</h2>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="team-card-icon">👨‍💼</div>
+        <h3>Your Manager</h3>
+        <p>Sarah Williams - Head of Product. Sarah has been with Nexus for 5 years and is passionate about mentoring new talent.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-icon">🤝</div>
+        <h3>Your Buddy</h3>
+        <p>Mike Chen - Product Manager. Mike will help you navigate your first weeks and be your go-to person for questions.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-icon">👥</div>
+        <h3>Your Team</h3>
+        <p>The Product Design Team. 6 talented designers working on core products that impact millions of users globally.</p>
+      </div>
+      <div class="team-card">
+        <div class="team-card-icon">🚀</div>
+        <h3>Your First Project</h3>
+        <p>Design System Overhaul. Collaborate with the team to modernize our component library and design patterns.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SIMPLE NOTE REPLACING TIMELINE ===== -->
+  <div class="timeline-wrapper">
+  <h3>Meet Everyone</h3>  <!-- ✅ ADD THIS -->
+  <p>Connect with your new team members and leadership during your first week. All details will be shared soon!</p>
+</div>
+
+
+  <!-- ===== GALLERY ===== -->
+  <section class="section">
+    <h2 class="section-title">Explore Our Office</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item"><div class="gallery-label">Design Studio</div></div>
+      <div class="gallery-item"><div class="gallery-label">Collaboration Hub</div></div>
+      <div class="gallery-item"><div class="gallery-label">Breakout Lounge</div></div>
+      <div class="gallery-item"><div class="gallery-label">Meeting Spaces</div></div>
+      <div class="gallery-item"><div class="gallery-label">Innovation Lab</div></div>
+      <div class="gallery-item"><div class="gallery-label">Rooftop Terrace</div></div>
+    </div>
+  </section>
+
+  <!-- ===== CULTURE ===== -->
+ <section class="section">
+  <h2 class="section-title">Our Culture</h2>
+  <div class="culture-grid">
+    <div class="culture-card" style="--bg: linear-gradient(135deg, #3b82f6, #60a5fa)">
+      <div class="culture-icon">🤝</div>
+      <h3>How We Work</h3>
+      <p>We believe in autonomy, collaboration, and radical transparency. Every voice matters, and we encourage bold ideas from everyone on the team.</p>
+    </div>
+    <div class="culture-card" style="--bg: linear-gradient(135deg, #10b981, #059669)">
+      <div class="culture-icon">🎯</div>
+      <h3>What We Value</h3>
+      <p>User-centric design, continuous learning, and pushing boundaries. We celebrate creativity, embrace challenges, and support each other's growth.</p>
+    </div>
+    <div class="culture-card" style="--bg: linear-gradient(135deg, #8b5cf6, #a78bfa)">
+      <div class="culture-icon">⭐</div>
+      <h3>Leadership Principles</h3>
+      <p>Think long-term, move fast, be humble. We invest in people, embrace change, and maintain high standards while staying human and kind.</p>
+    </div>
+  </div>
+</section>
+
+  <!-- ===== LEADERSHIP TEAM ===== -->
+  <section class="section">
+  <h2 class="section-title">Leadership Team</h2>
+  <div class="leadership-grid">
+    <div class="leader-card">
+      <div class="leader-avatar">
+        <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?w=400&h=400&fit=crop&crop=face" alt="Sarah Williams">
+      </div>
+      <div class="leader-name">Sarah Williams</div>
+      <div class="leader-role">CEO & Founder</div>
+      <div class="leader-bio">15+ years building world-class products. Passionate about design systems and team culture.</div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-avatar">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face" alt="Mike Chen">
+      </div>
+      <div class="leader-name">Mike Chen</div>
+      <div class="leader-role">CTO</div>
+      <div class="leader-bio">Expert in scalable architecture and developer experience. Previously at Google & Stripe.</div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+      </div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-avatar">
+        <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face" alt="Emily Park">
+      </div>
+      <div class="leader-name">Emily Park</div>
+      <div class="leader-role">Head of Design</div>
+      <div class="leader-bio">Award-winning designer focused on human-centered experiences. Speaker at design conferences worldwide.</div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-dribbble"></i></a>
+      </div>
+    </div>
+    <div class="leader-card">
+      <div class="leader-avatar">
+        <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face" alt="David Lee">
+      </div>
+      <div class="leader-name">David Lee</div>
+      <div class="leader-role">Head of Product</div>
+      <div class="leader-bio">Product leader with experience scaling startups to billions in revenue. Data-driven growth expert.</div>
+      <div class="social-icons">
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+  <!-- ===== CHECKLIST ===== -->
+ <section class="section checklist-section">
+  <h2 class="section-title">Onboarding Checklist</h2>
+  <div class="checklist-container">
+    
+    <div class="checklist-items">
+      <label class="checklist-item">
+        <input type="checkbox" class="toggle-checkbox">
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <h4>Complete HR Paperwork</h4>
+          <p>Sign contracts, tax forms, and benefits enrollment</p>
+        </div>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="toggle-checkbox" >
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <h4>Setup Workstation</h4>
+          <p>Configure laptop, monitors, and development environment</p>
+        </div>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="toggle-checkbox">
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <h4>Slack Access</h4>
+          <p>Join channels and connect with your team</p>
+        </div>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="toggle-checkbox">
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <h4>Email & Accounts</h4>
+          <p>Setup company email and tool accounts</p>
+        </div>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="toggle-checkbox">
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <h4>GitHub Access</h4>
+          <p>Repository permissions and code review setup</p>
+        </div>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="toggle-checkbox">
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <h4>Project Documentation</h4>
+          <p>Review project briefs and technical specs</p>
+        </div>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="toggle-checkbox">
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <h4>Team 1:1 Meetings</h4>
+          <p>Schedule introductions with key stakeholders</p>
+        </div>
+      </label>
+      <label class="checklist-item">
+        <input type="checkbox" class="toggle-checkbox">
+        <div class="checkbox"></div>
+        <div class="checklist-text">
+          <h4>First Code Review</h4>
+          <p>Submit your first pull request</p>
+        </div>
+      </label>
+    </div>
+  </div>
+</section>
+
+  <!-- ===== FINAL WELCOME ===== -->
+  <section class="final-section">
+    <h2>You're All Set!</h2>
+    <p>We're beyond excited to have you join the Nexus family. Your unique perspective and skills will help us achieve our mission of building the future of design collaboration.</p>
+    <div class="signature">— The Nexus Team</div>
+    <button class="cta-button" id="slackBtn"><i class="fab fa-slack"></i> Connect on Slack</button>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <!-- ===== PREMIUM HR FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-container">
+
+    <!-- Mission Line -->
+    <div class="footer-mission">
+      <p>Empowering teams with trust, growth, and innovation.</p>
+    </div>
+
+    <!-- Core Values -->
+    <div class="footer-values">
+      <h4>Our Core Values</h4>
+      <div class="values-grid">
+        <span>Integrity</span>
+        <span>Innovation</span>
+        <span>Collaboration</span>
+        <span>Ownership</span>
+        <span>Empathy</span>
+      </div>
+    </div>
+
+
+    <!-- HR Contact -->
+    <div class="footer-contact">
+      <p>Need help? Our HR team is here for you.</p>
+      <p><strong>hr@nexus.com</strong></p>
+    </div>
+
+    <!-- Leadership Quote -->
+    <div class="footer-quote">
+      <p>“People are the heart of everything we build.”</p>
+      <span>— CEO, Nexus Corporation</span>
+    </div>
+
+    <!-- Bottom Note -->
+    <div class="footer-bottom">
+      <p>© 2025 Nexus Corporation. All rights reserved.</p>
+    </div>
+
+  </div>
+</footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+  const checkboxes = document.querySelectorAll('.toggle-checkbox');
+  const progressFill = document.getElementById('progressFill');
+  
+  function updateProgress() {
+    const checkedCount = document.querySelectorAll('.toggle-checkbox:checked').length;
+    const total = checkboxes.length;
+    const progress = Math.round((checkedCount / total) * 100);
+    progressFill.style.width = progress + '%';
+  }
+  
+  checkboxes.forEach(checkbox => {
+    checkbox.addEventListener('change', updateProgress);
+  });
+  
+  // Initial progress
+  updateProgress();
+});
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const employeeData = {
+      name: "Alex Johnson",
+      role: "Senior Product Designer",
+      department: "Product",
+      joinDate: "Dec 1, 2025",
+      funFact: "Coffee enthusiast 🎨"
+    };
+
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      for (let i = 0; i < 100; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 10 + 's';
+        particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    function initHero() {
+      gsap.from("#welcomeText", {opacity: 0, y: 80, duration: 1.5, ease: "power3.out"});
+      gsap.from("#heroSubtext", {opacity: 0, y: 60, duration: 1.2, delay: 0.5, ease: "power3.out"});
+      gsap.from(".scroll-indicator", {opacity: 0, y: 30, duration: 1, delay: 1.5, ease: "power2.out"});
+    }
+
+    function initIdentityCard() {
+      const card = document.querySelector('.identity-card');
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 15;
+        const rotateY = (centerX - x) / 15;
+        gsap.to(card, {rotateX: rotateX, rotateY: rotateY, duration: 0.6, ease: "power2.out"});
+      });
+      card.addEventListener('mouseleave', () => {
+        gsap.to(card, {rotateX: 0, rotateY: 0, scale: 1, duration: 0.8, ease: "power2.out"});
+      });
+    }
+
+    function initVideo() {
+      const playBtn = document.getElementById('playBtn');
+      playBtn.addEventListener('click', () => {
+        gsap.to(playBtn, {scale: 0.95, duration: 0.2, yoyo: true, repeat: 1});
+        alert('🎥 Playing founder welcome video... (Replace with real video URL)');
+      });
+    }
+
+    function initChecklist() {
+      const items = document.querySelectorAll('.checklist-item');
+      const progressFill = document.getElementById('progressFill');
+      let completedCount = 0;
+      const totalItems = items.length;
+      items.forEach((item) => {
+        item.addEventListener('click', () => {
+          if (!item.classList.contains('completed')) {
+            item.classList.add('completed');
+            completedCount++;
+            const progress = (completedCount / totalItems) * 100;
+            gsap.to(progressFill, {width: progress + '%', duration: 0.8, ease: "power3.out"});
+            gsap.fromTo(item, {scale: 1, opacity: 1}, {scale: 0.97, opacity: 0.7, duration: 0.3, yoyo: true, repeat: 1});
+            if (completedCount === totalItems) {
+              celebrateCompletion();
+            }
+          }
+        });
+      });
+    }
+
+    function celebrateCompletion() {
+      const canvas = document.createElement('canvas');
+      canvas.style.cssText = 'position:fixed;top:0;left:0;pointer-events:none;z-index:9999';
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      document.body.appendChild(canvas);
+      const ctx = canvas.getContext('2d');
+      const particles = [];
+      for (let i = 0; i < 150; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: canvas.height + 10,
+          vx: (Math.random() - 0.5) * 15,
+          vy: Math.random() * -15 - 8,
+          color: `hsl(${Math.random() * 60 + 240}, 70%, 60%)`,
+          size: Math.random() * 6 + 3,
+          rotation: 0,
+          rotSpeed: (Math.random() - 0.5) * 0.2
+        });
+      }
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.25;
+          p.rotation += p.rotSpeed;
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+        });
+        if (particles.some(p => p.y < canvas.height)) {
+          requestAnimationFrame(animate);
+        } else {
+          document.body.removeChild(canvas);
+        }
+      }
+      animate();
+    }
+
+    function personalizePage() {
+      document.getElementById('welcomeText').textContent = `Welcome ${employeeData.name}`;
+      document.getElementById('heroSubtext').textContent = `Your journey at Nexus begins today. We're thrilled to have you on board.`;
+      document.getElementById('empName').textContent = employeeData.name;
+      document.getElementById('empRole').textContent = employeeData.role;
+      document.getElementById('empDept').textContent = employeeData.department;
+      document.getElementById('joinDate').textContent = employeeData.joinDate;
+      document.getElementById('funFact').textContent = employeeData.funFact;
+    }
+
+    function initSlackButton() {
+      const slackBtn = document.getElementById('slackBtn');
+      slackBtn.addEventListener('click', () => {
+        gsap.to(slackBtn, {scale: 0.95, duration: 0.15, yoyo: true, repeat: 1});
+        window.open('https://nexus.slack.com', '_blank');
+      });
+    }
+
+    window.addEventListener('load', () => {
+      createParticles();
+      personalizePage();
+      initHero();
+      initIdentityCard();
+      initVideo();
+      initChecklist();
+      initScrollAnimations();
+      initSlackButton();
+      // Team cards stagger animation
+      gsap.utils.toArray('.team-card').forEach((card, i) => {
+        gsap.from(card, {
+          scrollTrigger: card,
+          opacity: 0,
+          y: 60,
+          duration: 0.8,
+          delay: i * 0.1
+        });
+      });
+    });
+
+    function initScrollAnimations() {
+      gsap.utils.toArray('.section').forEach(section => {
+        gsap.from(section.children, {
+          scrollTrigger: {
+            trigger: section,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          },
+          opacity: 0,
+          y: 80,
+          duration: 1,
+          stagger: 0.15,
+          ease: "power3.out"
+        });
+      });
+    }
+
+    window.addEventListener('resize', () => {
+      ScrollTrigger.refresh();
+    });
+  </script>
+</body>
+</html>
